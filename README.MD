@@ -1,9 +1,7 @@
 ### Simple DB Class
 > Based on the DB class mysqli secondary packaging.Using pretreatment 
 ```php
-    
     //autoload class 
-
     spl_autoload_register(function($className){
         $dirName = dirname($className).DIRECTORY_SEPARATOR;
         $className = basename($className);
@@ -29,9 +27,7 @@ try
            ]
        ]
    );
-
    //Test Insert The Execute method return affected rows 
-
     $affected = $db->execute('INSERT INTO tb_article_tag_name(`name`,weight,base) VALUES(?,?,?)',
         [
             'types'=>'sii',
@@ -59,5 +55,4 @@ catch(\Exception $e)
 {
     echo $e->getMessage();
 }
-
 ```
