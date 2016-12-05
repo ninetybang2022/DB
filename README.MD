@@ -20,7 +20,7 @@
 
         $db = new Lib\DB\DB('localhost', 'root', '', 'article');
         $result = $db->query(
-           "SELECT * FROM tb_article_detail WHERE aid = ?",
+           "SELECT * FROM select_table WHERE aid = ?",
            [
                'types'=>'i',
                'bindParams'=>[
@@ -29,7 +29,7 @@
            ]
        );
     //Test Insert The Execute method return affected rows 
-    $affected = $db->execute('INSERT INTO tb_article_tag_name(`name`,weight,base) VALUES(?,?,?)',
+    $affected = $db->execute('INSERT INTO insert_table(`name`,weight,base) VALUES(?,?,?)',
         [
             'types'=>'sii',
             'bindParams'=>[
