@@ -13,21 +13,21 @@
             die('file not found'. $path);
         }
     });
-try
-{
-    //Test query Return all result 
+    try
+    {
+        //Test query Return all result 
 
-    $db = new Lib\DB\DB('localhost', 'root', '', 'article');
-    $result = $db->query(
-       "SELECT * FROM tb_article_detail WHERE aid = ?",
-       [
-           'types'=>'i',
-           'bindParams'=>[
-               'aid'=>1106
+        $db = new Lib\DB\DB('localhost', 'root', '', 'article');
+        $result = $db->query(
+           "SELECT * FROM tb_article_detail WHERE aid = ?",
+           [
+               'types'=>'i',
+               'bindParams'=>[
+                   'aid'=>1106
+               ]
            ]
-       ]
-   );
-   //Test Insert The Execute method return affected rows 
+       );
+    //Test Insert The Execute method return affected rows 
     $affected = $db->execute('INSERT INTO tb_article_tag_name(`name`,weight,base) VALUES(?,?,?)',
         [
             'types'=>'sii',
@@ -41,18 +41,18 @@ try
     echo $affected;
     echo '<br />';
     echo $db->getInsertId();
-}
-catch(Exceptions\DB\ConnectFail $e)
-{
-    echo $e->getMessage();
-}
-catch(Exceptions\DB\SQLException $e)
-{
-    echo $e->getMessage();
-    echo $e->getSql();
-}
-catch(\Exception $e)
-{
-    echo $e->getMessage();
-}
+    }
+    catch(Exceptions\DB\ConnectFail $e)
+    {
+        echo $e->getMessage();
+    }
+    catch(Exceptions\DB\SQLException $e)
+    {
+        echo $e->getMessage();
+        echo $e->getSql();
+    }
+    catch(\Exception $e)
+    {
+        echo $e->getMessage();
+    }
 ```
