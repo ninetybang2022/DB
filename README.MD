@@ -1,4 +1,4 @@
-### Simple DB Class
+### Simple Mysql DB Class
 > Based on the DB class mysqli secondary packaging.Using pretreatment 
 
 ```php
