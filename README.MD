@@ -1,5 +1,6 @@
 ### Simple DB Class
 > Based on the DB class mysqli secondary packaging.Using pretreatment 
+
 ```php
     //autoload class 
     spl_autoload_register(function($className){
