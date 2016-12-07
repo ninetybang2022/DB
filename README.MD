@@ -20,6 +20,7 @@
 
         $db = new Lib\DB\DB('localhost', 'root', '', 'article');
         $result = $db->query(
+<<<<<<< HEAD
            "SELECT * FROM select_table WHERE aid = ?",
            [
                'types'=>'i',
@@ -30,18 +31,35 @@
        );
     //Test Insert The Execute method return affected rows 
     $affected = $db->execute('INSERT INTO insert_table(`name`,weight,base) VALUES(?,?,?)',
+=======
+        "SELECT * FROM tb_article_detail WHERE aid = ?",
+>>>>>>> d9bd5aa... 更新markdown
         [
-            'types'=>'sii',
+            'types'=>'i',
             'bindParams'=>[
-                'name'=>'66779988',
-                'weight'=>100,
-                'base'=>0
+                'aid'=>1106
             ]
         ]
     );
+<<<<<<< HEAD
     echo $affected;
     echo '<br />';
     echo $db->getInsertId();
+=======
+    //Test Insert The Execute method return affected rows 
+    $affected = $db->execute('INSERT INTO tb_article_tag_name(`name`,weight,base) VALUES(?,?,?)',
+    [
+       'types'=>'sii',
+       'bindParams'=>[
+            'name'=>'66779988',
+            'weight'=>100,
+            'base'=>0
+        ]
+    ]);
+        echo $affected;
+        echo '<br />';
+        echo $db->getInsertId();
+>>>>>>> d9bd5aa... 更新markdown
     }
     catch(Exceptions\DB\ConnectFail $e)
     {
@@ -56,4 +74,8 @@
     {
         echo $e->getMessage();
     }
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> d9bd5aa... 更新markdown
