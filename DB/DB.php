@@ -47,9 +47,7 @@ class DB
     protected $insertId;
     //受影响的行数
     protected $affectedRows;
-
-
-
+    
     public function __construct($host = null, $name = null, $pwd = null, $dbname = null, $port = 3306
                                 , $charset = 'utf8')
     {
@@ -87,13 +85,11 @@ class DB
     /**
      * 执行没有结果集的SQL查询
      */
-    public function execute($sql, $bindParams)
+    public function execute($sql, $bindParams = [])
     {
         $this->prepareCommon($sql, $bindParams);
         $this->affectedRows = $this->db->affected_rows;
         $this->insertId = $this->db->insert_id;
-        $this->freeStmt();
-        $this->close();
         return $this->affectedRows;
     }
 
@@ -101,7 +97,7 @@ class DB
      * 执行存在结果集的SQL查询
      * @param $sql
      */
-    public function query($sql, $bindParams)
+    public function query($sql, $bindParams = [])
     {
         $this->prepareCommon($sql, $bindParams);
         return $this->getResult();
@@ -109,9 +105,12 @@ class DB
 
     private function prepareCommon($sql, $bindParams)
     {
-        $this->bindParams = $bindParams;
+        $this->bindParams = $bindParams?:$this->bindParams;
         $this->createPrepare($sql);
-        $this->createBindParam($bindParams['types'], $bindParams['bindParams']);
+        if($this->bindParams['types'] && $this->bindParams['bindParams'])
+        {
+            $this->createBindParam($bindParams['types'], $bindParams['bindParams']);
+        }
         $this->stmtExecute();
     }
 
@@ -160,14 +159,25 @@ class DB
 
     public function getAffectedRows()
     {
-        return $this->affected_rows;
+        return $this->affectedRows;
     }
 
     private function getResult()
     {
         $result = $this->result->fetch_all(MYSQLI_ASSOC);
-        $this->freeResultStmt();
         return $result;
+    }
+
+    public function __destruct()
+    {
+        if($this->result)
+        {
+            $this->freeResultStmt();
+        }else{
+
+        }
+        $this->freeStmt();
+        $this->close();
     }
 
     public function freeResultStmt()
