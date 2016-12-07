@@ -173,11 +173,12 @@ class DB
         if($this->result)
         {
             $this->freeResultStmt();
-        }else{
-
         }
-        $this->freeStmt();
-        $this->close();
+        else
+        {
+            $this->freeStmt();
+            $this->close();
+        }
     }
 
     public function freeResultStmt()
